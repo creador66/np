@@ -47,10 +47,29 @@ function procesarCompra() {
     }
     else {
 
-        //aqui se coloca el user id generado en el emailJS
+       emailjs.init('user_rXeVBFddZ07hqq3aHAdxO') 
         emailjs.init('user_CEozz2F39lJJOLF5mJiDA')
 
-        /* AGREGAR DATOS DETALLE DEL PEDIDO A UN TEXT AREA */
+        const btn = document.getElementById('button');
+
+document.getElementById('form')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'Sending...';
+
+   const serviceID = 'default_service';
+   const templateID = 'template_opigt9t';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Send Email';
+      alert('Sent!');
+    }, (err) => {
+      btn.value = 'Send Email';
+      alert(JSON.stringify(err));
+    });
+});
         const textArea = document.createElement('textarea');
         textArea.id = "detalleCompra";
         textArea.name = "detalleCompra";
